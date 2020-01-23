@@ -25,6 +25,7 @@
 	<source-file src="src/android/res/values/bcolors.xml" target-dir="res/values"/>
 	<source-file src="src/android/res/values/bstrings.xml" target-dir="res/values"/>
 	<source-file src="src/android/res/values/bstyles.xml" target-dir="res/values"/>	
+	<source-file src="src/android/res/values-hy/bstrings.xml" target-dir="res/values-hy"/>
 	
 	<config-file target="res/values/bstrings.xml" parent="/*">
 		<string name="api_url">$API_URL</string>
