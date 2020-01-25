@@ -75,13 +75,14 @@ public class BiometricAuth extends CordovaPlugin {
 		mCallbackContext = callbackContext;
         if (action.equals("analyze")) {
             path = args.getString(0);
-            this.analyze(callbackContext);
+			String lang = args.getString(1);
+            this.analyze(callbackContext, lang);
             return true;
         }
         return false;
     }
 
-    private void analyze(CallbackContext callbackContext) {
+    private void analyze(CallbackContext callbackContext, String lang) {
 
 		final CordovaPlugin that = this;
 		LoginStatusListener loginStatusListener = new LoginStatusListener() {
@@ -100,6 +101,14 @@ public class BiometricAuth extends CordovaPlugin {
                 callbackContext.error(errorMessage);
             }
         };
+		
+		if(lang.equals("en")) {
+			OzLivenessSDK.INSTANCE.setLocale(OzLocale.EN);
+		} else if(lang.equals("ru")) {
+			OzLivenessSDK.INSTANCE.setLocale(OzLocale.RU);
+		} else {
+			OzLivenessSDK.INSTANCE.setLocale(OzLocale.HY);
+		}
 		
 		Context context = this.cordova.getActivity();
 		String packageName = context.getPackageName();
