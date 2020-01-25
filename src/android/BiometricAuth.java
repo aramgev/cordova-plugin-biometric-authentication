@@ -34,6 +34,7 @@ import com.ozforensics.liveness.sdk.network.manager.NetworkManager;
 import com.ozforensics.liveness.sdk.utility.enums.Action;
 import com.ozforensics.liveness.sdk.utility.enums.OzApiRequestErrors;
 import com.ozforensics.liveness.sdk.utility.enums.OzApiStatusVideoAnalyse;
+import com.ozforensics.liveness.sdk.utility.enums.OzLocale;
 import com.ozforensics.liveness.sdk.utility.enums.ResultCode;
 import com.ozforensics.liveness.sdk.utility.managers.OzLivenessSDK;
 import com.ozforensics.liveness.sdk.actions.model.OzMediaResponse;
