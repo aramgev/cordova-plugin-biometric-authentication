@@ -128,9 +128,11 @@ public class BiometricAuth extends CordovaPlugin {
         List<OzMediaResponse> sdkMediaResult = OzLivenessSDK.INSTANCE.getResultFromIntent(data);
 		
 		
-        if (resultCode == -1) {
+        if (resultCode == -1) { // Ok Result
             uploadAndAnalyze(sdkMediaResult);
-        }
+        } else if (resultCode == -1) { // Canceled Result
+			mCallbackContext.error("canceled");
+		}
     }
 	
 	private void uploadAndAnalyze(List<OzMediaResponse> mediaList) {
