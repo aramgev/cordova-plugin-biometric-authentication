@@ -130,7 +130,7 @@ public class BiometricAuth extends CordovaPlugin {
 		
         if (resultCode == -1) { // Ok Result
             uploadAndAnalyze(sdkMediaResult);
-        } else if (resultCode == -1) { // Canceled Result
+        } else if (resultCode == 0) { // Canceled Result
 			mCallbackContext.error("canceled");
 		}
     }
