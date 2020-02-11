@@ -5,7 +5,8 @@
   "cordova": {
     "id": "cordova-plugin-biometric-authentication",
     "platforms": [
-      "android"
+      "android", 
+	  "ios"
     ]
   },
   "keywords": [
