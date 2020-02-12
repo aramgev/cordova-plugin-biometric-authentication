@@ -43,7 +43,8 @@
 		</feature>
 
 	</config-file>
-
+	<framework src="OZLivenessSDK" type="podspec"  />
+	
 	<!-- Add in the plugin .swift files here -->
 	<source-file src="src/ios/BiometricAuth.swift" />
 	
