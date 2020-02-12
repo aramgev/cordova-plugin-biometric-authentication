@@ -3,8 +3,7 @@ import Foundation
 
 @objc(BiometricAuth) class BiometricAuth : CDVPlugin {
   @objc(analyze:) 
-  func analyze(command: CDVInvokedUrlCommand) { 
-	self.showToast(message: "Teeest")
+  func analyze(command: CDVInvokedUrlCommand) { 	
     var pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded")  
     self.commandDelegate!.send(pluginResult, callbackId: command.callbackId)
   }
