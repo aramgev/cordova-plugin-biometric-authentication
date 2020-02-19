@@ -43,7 +43,7 @@
 		</feature>
 
 	</config-file>
-	
+	<pod name="OZLivenessSDK"  git="git@gitlab.com:oz-forensics/liveness_sdk.git" branch="develop"/>
 	<podspec>
       <pods use-frameworks="true">
         <pod name="OZLivenessSDK"  git="git@gitlab.com:oz-forensics/liveness_sdk.git" branch="develop"/>
