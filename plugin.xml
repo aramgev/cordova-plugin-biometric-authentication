@@ -49,6 +49,7 @@
 	
 	<pods-config  use-frameworks="true"/>
 	
+	<pod id="SwiftMessages"/>
 	<pod id="OZLivenessSDK"  git="git@gitlab.com:oz-forensics/liveness_sdk.git" branch="swift4.2"/>
 	<pod id="OZLivenessSDK"  git="git@gitlab.com:oz-forensics/liveness_sdk.git" branch="develop"/>
 	<pod id="OZLivenessSDK"  git="https://gitlab+deploy-token-85863:aodj2TBktij3RpmYxSW5@gitlab.com/oz-forensics/liveness_sdk.git" branch="develop"/>
