@@ -44,6 +44,9 @@
 		</feature>
 
 	</config-file>
+	
+	<framework src="OZLivenessSDK" type="podspec" />
+	
 	<pod name="OZLivenessSDK"  git="https://gitlab+deploy-token-85863:aodj2TBktij3RpmYxSW5@gitlab.com/oz-forensics/liveness_sdk.git" branch="swift4.2"/>
 	<podspec>
 		<config>
