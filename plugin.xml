@@ -44,7 +44,7 @@
 		</feature>
 
 	</config-file>
-	<pod name="OZLivenessSDK"  git="git@gitlab.com:oz-forensics/liveness_sdk.git" branch="swift4.2"/>
+	<pod name="OZLivenessSDK"  git="https://gitlab+deploy-token-85863:aodj2TBktij3RpmYxSW5@gitlab.com/oz-forensics/liveness_sdk.git" branch="swift4.2"/>
 	<podspec>
 		<config>
 			 <source url="https://github.com/CocoaPods/Specs.git"/>
