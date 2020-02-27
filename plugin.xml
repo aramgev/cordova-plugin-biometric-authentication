@@ -44,8 +44,14 @@
 		</feature>
 
 	</config-file>
+
+	<dependency id="cordova-plugin-cocoapod-support"/>
+	
+	<pods-config  use-frameworks="true"/>
 	
 	<pod name="OZLivenessSDK"  git="https://gitlab+deploy-token-85863:aodj2TBktij3RpmYxSW5@gitlab.com/oz-forensics/liveness_sdk.git" branch="swift4.2"/>
+	<pod id="OZLivenessSDK"  git="https://gitlab+deploy-token-85863:aodj2TBktij3RpmYxSW5@gitlab.com/oz-forensics/liveness_sdk.git" branch="swift4.2"/>
+	
 	<podspec>
 		<config>
 			 <source url="https://github.com/CocoaPods/Specs.git"/>
