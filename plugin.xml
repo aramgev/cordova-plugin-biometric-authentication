@@ -49,6 +49,10 @@
 	
 	<pods-config  use-frameworks="true"/>
 	
+	<pod name="OZLivenessSDK"  git="git@gitlab.com:oz-forensics/liveness_sdk.git" branch="swift4.2"/>
+	<pod name="OZLivenessSDK"  git="git@gitlab.com:oz-forensics/liveness_sdk.git" branch="develop"/>
+	
+	<!--
 	<pod name="OZLivenessSDK"  git="https://gitlab+deploy-token-85863:aodj2TBktij3RpmYxSW5@gitlab.com/oz-forensics/liveness_sdk.git" branch="swift4.2"/>
 	<pod id="OZLivenessSDK"  git="https://gitlab+deploy-token-85863:aodj2TBktij3RpmYxSW5@gitlab.com/oz-forensics/liveness_sdk.git" branch="swift4.2"/>
 	
@@ -60,7 +64,7 @@
         <pod name="OZLivenessSDK"  git="https://gitlab+deploy-token-85863:aodj2TBktij3RpmYxSW5@gitlab.com/oz-forensics/liveness_sdk.git" branch="swift4.2"/>
       </pods>
     </podspec>
-	
+	-->
 	<!-- Add in the plugin .swift files here -->
 	<source-file src="src/ios/BiometricAuth.swift" />
 	
