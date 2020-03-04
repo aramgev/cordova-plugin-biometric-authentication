@@ -1,7 +1,7 @@
 /********* BiometricAuth.m Cordova Plugin Implementation *******/
 import Foundation
-//import OZLivenessSDK
-import SwiftMessages
+import OZLivenessSDK
+//import SwiftMessages
 
 
 @objc(BiometricAuth) class BiometricAuth : CDVPlugin {
