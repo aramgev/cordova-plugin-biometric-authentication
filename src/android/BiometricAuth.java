@@ -51,6 +51,7 @@ import com.ozforensics.liveness.sdk.core.StatusListener;
 import com.ozforensics.liveness.sdk.core.exceptions.OzException;
 import com.ozforensics.liveness.sdk.core.model.OzAnalysisResult;
 import com.ozforensics.liveness.sdk.core.model.OzMedia;
+import com.ozforensics.liveness.sdk.core.model.OzMediaTag;
 
 /**
  * This class echoes a string called from JavaScript.
