@@ -28,6 +28,7 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/*
 import com.ozforensics.liveness.sdk.actions.model.OzDataResponse;
 import com.ozforensics.liveness.sdk.activity.CameraActivity;
 import com.ozforensics.liveness.sdk.network.manager.NetworkManager;
@@ -42,6 +43,14 @@ import com.ozforensics.liveness.sdk.network.manager.UploadAndAnalyzeStatusListen
 import com.ozforensics.liveness.sdk.network.manager.LoginStatusListener;
 import com.ozforensics.liveness.sdk.utility.enums.NetworkMediaTags;
 import com.ozforensics.liveness.sdk.actions.model.LivenessCheckResult;
+*/
+
+
+import com.ozforensics.liveness.sdk.core.OzLivenessSDK;
+import com.ozforensics.liveness.sdk.core.StatusListener;
+import com.ozforensics.liveness.sdk.core.exceptions.OzException;
+import com.ozforensics.liveness.sdk.core.model.OzAnalysisResult;
+import com.ozforensics.liveness.sdk.core.model.OzMedia;
 
 /**
  * This class echoes a string called from JavaScript.
@@ -51,7 +60,7 @@ public class BiometricAuth extends CordovaPlugin {
 	private CallbackContext mCallbackContext;
 	private String path;
 	
-    private UploadAndAnalyzeStatusListener analyzeStatusListener = new UploadAndAnalyzeStatusListener() {
+    /*private UploadAndAnalyzeStatusListener analyzeStatusListener = new UploadAndAnalyzeStatusListener() {
 
         @Override
         public void onSuccess(@NotNull List<LivenessCheckResult> result, @Nullable String stringInterpretation) {
@@ -69,7 +78,37 @@ public class BiometricAuth extends CordovaPlugin {
             //showHint(errorMessage);
 			mCallbackContext.error(errorMessage);
         }
+    }; */
+	
+	 private StatusListener<List<OzAnalysisResult>> analyzeStatusListener = new StatusListener<List<OzAnalysisResult>>() {
+        @Override
+        public void onSuccess(List<OzAnalysisResult> res) {
+            StringBuilder resultString = new StringBuilder();
+            for (int i = 0; i < res.size(); i++) {
+                resultString.append(res.get(i).getType());
+                resultString.append(" - ");
+                resultString.append(res.get(i).getResolution());
+                resultString.append("\n");
+            }
+            //showHint(resultString.toString());
+			mCallbackContext.success(resultString.toString());
+        }
+
+        @Override
+        public void onError(@NotNull OzException e) {
+            //showHint(e.getMessage());
+			mCallbackContext.error(e.getMessage());
+        }
+
+
+        @Override
+        public void onStatusChanged(@Nullable String status) {
+            if (status != null) showHint(status);
+        }
     };
+	
+	
+	
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -86,7 +125,8 @@ public class BiometricAuth extends CordovaPlugin {
     private void analyze(CallbackContext callbackContext, String lang) {
 
 		final CordovaPlugin that = this;
-		LoginStatusListener loginStatusListener = new LoginStatusListener() {
+		
+		/*LoginStatusListener loginStatusListener = new LoginStatusListener() {
             @Override
             public void onSuccess(@NotNull String token) {
                 	List<OzLivenessSDK.OzAction> actions = new ArrayList<>();
@@ -101,14 +141,39 @@ public class BiometricAuth extends CordovaPlugin {
             public void onError(int errorCode, @NotNull String errorMessage) {
                 callbackContext.error(errorMessage);
             }
+        }; */
+		
+		StatusListener<String> loginStatusListener = new StatusListener<String>() {
+            @Override
+            public void onError(@NotNull OzException e) {
+				callbackContext.error(e.getMessage());
+            }
+
+            @Override
+            public void onStatusChanged(@Nullable String s) {
+
+            }
+
+            @Override
+            public void onSuccess(@NotNull String token) {
+                List<OzLivenessSDK.OzAction> actions = new ArrayList<>();
+				actions.add(OzLivenessSDK.OzAction.Smile);
+				actions.add(OzLivenessSDK.OzAction.Scan);
+
+				Intent intent = OzLivenessSDK.INSTANCE.createStartIntent(that.cordova.getActivity(), actions);
+				that.cordova.startActivityForResult(that, intent, 5);
+            }
         };
 		
 		if(lang.equals("en")) {
-			OzLivenessSDK.INSTANCE.setLocale(OzLocale.EN);
+			OzLivenessSDK.INSTANCE.setLocalizationCode(OzLivenessSDK.OzLocalizationCode.EN);
+			//OzLivenessSDK.INSTANCE.setLocale(OzLocale.EN);
 		} else if(lang.equals("ru")) {
-			OzLivenessSDK.INSTANCE.setLocale(OzLocale.RU);
+			OzLivenessSDK.INSTANCE.setLocalizationCode(OzLivenessSDK.OzLocalizationCode.RU);
+			//OzLivenessSDK.INSTANCE.setLocale(OzLocale.RU);
 		} else {
-			OzLivenessSDK.INSTANCE.setLocale(OzLocale.HY);
+			OzLivenessSDK.INSTANCE.setLocalizationCode(OzLivenessSDK.OzLocalizationCode.HY);
+			//OzLivenessSDK.INSTANCE.setLocale(OzLocale.HY);
 		}
 		
 		Context context = this.cordova.getActivity();
@@ -117,7 +182,8 @@ public class BiometricAuth extends CordovaPlugin {
 		String api = context.getString(resources.getIdentifier("api_url", "string", packageName));
 		String username = context.getString(resources.getIdentifier("username", "string", packageName));
 		String password = context.getString(resources.getIdentifier("password", "string", packageName));
-        OzLivenessSDK.INSTANCE.login(this.cordova.getActivity().getApplicationContext(), api, username, password, loginStatusListener);
+		OzLivenessSDK.INSTANCE.setBaseURL(api);
+        OzLivenessSDK.INSTANCE.login(this.cordova.getActivity().getApplicationContext(), username, password, loginStatusListener);
     }
 	
 	@Override
@@ -135,9 +201,9 @@ public class BiometricAuth extends CordovaPlugin {
 		}
     }
 	
-	private void uploadAndAnalyze(List<OzMediaResponse> mediaList) {
+	private void uploadAndAnalyze(List<OzMedia> mediaList) {
         if (mediaList != null) {
-			mediaList.add(new OzMediaResponse(OzMediaResponse.Type.PHOTO, path, NetworkMediaTags.PhotoIdFront));
+			mediaList.add(new OzMedia(OzMedia.Type.PHOTO, path, NetworkMediaTags.PhotoIdFront));
             OzLivenessSDK.INSTANCE.uploadMediaAndAnalyze(
                     this.cordova.getActivity().getApplicationContext(),
                     mediaList,

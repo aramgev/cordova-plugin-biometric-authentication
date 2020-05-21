@@ -20,7 +20,7 @@
 	 <preference name="PASSWORD" />
 	
 	
-	<resource-file src="src/android/libs/oz-liveness-sdk-2.0.2-release.aar" target="libs/oz-liveness-sdk-2.0.2-release.aar"/>
+	<resource-file src="src/android/libs/oz-liveness-sdk-3.4.2-release.aar" target="libs/oz-liveness-sdk-3.4.2-release.aar"/>
 		
 	<source-file src="src/android/res/values/bcolors.xml" target-dir="res/values"/>
 	<source-file src="src/android/res/values/bstrings.xml" target-dir="res/values"/>
