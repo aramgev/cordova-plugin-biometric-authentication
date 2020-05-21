@@ -103,7 +103,7 @@ public class BiometricAuth extends CordovaPlugin {
 
         @Override
         public void onStatusChanged(@Nullable String status) {
-            if (status != null) showHint(status);
+            //if (status != null) showHint(status);
         }
     };
 	
@@ -191,7 +191,7 @@ public class BiometricAuth extends CordovaPlugin {
         //super.onActivityResult(requestCode, resultCode, data);
 
         String error = OzLivenessSDK.INSTANCE.getErrorFromIntent(data);
-        List<OzMediaResponse> sdkMediaResult = OzLivenessSDK.INSTANCE.getResultFromIntent(data);
+        List<OzMedia> sdkMediaResult = OzLivenessSDK.INSTANCE.getResultFromIntent(data);
 		
 		
         if (resultCode == -1) { // Ok Result
@@ -203,7 +203,7 @@ public class BiometricAuth extends CordovaPlugin {
 	
 	private void uploadAndAnalyze(List<OzMedia> mediaList) {
         if (mediaList != null) {
-			mediaList.add(new OzMedia(OzMedia.Type.PHOTO, path, NetworkMediaTags.PhotoIdFront));
+			mediaList.add(new OzMedia(OzMedia.Type.PHOTO, path, OzMediaTag.PhotoIdFront));
             OzLivenessSDK.INSTANCE.uploadMediaAndAnalyze(
                     this.cordova.getActivity().getApplicationContext(),
                     mediaList,
