@@ -92,7 +92,8 @@ public class BiometricAuth extends CordovaPlugin {
                 resultString.append("\n");
             }
             //showHint(resultString.toString());
-			mCallbackContext.success(resultString.toString());
+			//mCallbackContext.success(resultString.toString());			
+			mCallbackContext.success(res.get(0).getFolderId());
         }
 
         @Override
